@@ -1,0 +1,1 @@
+[data,data_with_uncertainty,quality_with_uncertainty] = data_with_uncertianty_generation(4,0,10,100,1)

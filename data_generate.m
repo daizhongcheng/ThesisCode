@@ -4,9 +4,9 @@ clear;
 normdata = [15;30;45];
 ch_to = unifrnd(-0.2,0.2,3,30000);%sensor range
 normdata = normdata + [0.001 0 0;0 0.001 0;0 0 0.001]*randn(3,30000);
-normdata = normdata + ch_to;
-ch_beto = unifrnd(4,10,3,30000);
-addfault_data = normdata+ch_beto;
+% normdata = normdata + ch_to;
+% ch_beto = unifrnd(4,10,3,30000);
+addfault_data = normdata+[1;1;1];
 % data_nor_add = [normdata addfault_data];
 sigma_y = normdata*normdata'/(30000-1);
 % sigma_y = data_nor_add*data_nor_add'/(1000-1);
@@ -27,6 +27,7 @@ ffor = normdata ;
 addfault = addfault_data ;
 faultfree = normdata ;
 [m,n] = size(faultfree) ;
+z = (zscore(faultfree'))';
 %%  data is falut free T2
 % calculate the variances.   data is fault free
 ff = [0;0;0] ; 
@@ -49,7 +50,7 @@ for i = 1:n
    faultfree(:,i) = ffsigmad * (faultfree(:,i)-Eyobs);
 end
 % calculate Covariance and evalue function
-Sigma_y = faultfree*faultfree'/(n-1) ;
+Sigma_y = (faultfree-Eyobs)*(faultfree-Eyobs)'/(n-1) ;
 inv_Sigma_y = inv(Sigma_y) ;
 J_t2 = ones(1,n);
 for i = 1:n 
@@ -139,7 +140,7 @@ C_R_mulfault = cell(1,n) ;
 for i = 1:n 
     C_R_mulfault(i) = mat2cell(R_mulfault(:,i)*R_mulfault(:,i)'+Dis,3) ;
 end
-   X = karcher( C_R_mulfault{1:n}) ;% mean value
+   
     dis_Rimmu = ones(1,n) ;
 for i = 1:n
     dis_Rimmu(i) = distance_riemann(C_R_mulfault{i},X) ;
@@ -175,7 +176,7 @@ C_R_allf = cell(1,n) ;
 for i = 1:n 
     C_R_allf(i) = mat2cell(R_allf(:,i)*R_allf(:,i)'+Dis,3) ;
 end
-   X = karcher( C_R_allf{1:n}) ;% mean value
+ 
     dis_Rimall = ones(1,n) ;
 for i = 1:n
     dis_Rimall(i) = distance_riemann(C_R_allf{i},X) ;

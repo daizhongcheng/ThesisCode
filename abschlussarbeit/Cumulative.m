@@ -6,12 +6,10 @@ SEN = [] ;
 SDEN = [] ;
 SREN = [] ;
     for i = 1:x
-    SEN = [SEN ; sum(EN(j:j+n-1,1:2))] ;
-    c = sum(EN(j:j+n-1,1:2));
-    x = c(1)*ones(n,1);
-    y = c(2)*ones(n,1);
-    z = [x y] ;
-    SDEN = [SDEN ; z];
+    Sum_J = sum(EN(j:j+n-1,1:2)) ;
+    SEN = [SEN ; Sum_J] ;
+    c = [Sum_J(1)*ones(n,1) Sum_J(2)*ones(n,1)];
+    SDEN = [SDEN;c] ;
     j = j+n ;
     end
     
@@ -25,4 +23,6 @@ SREN = [] ;
     SREN = [SREN;z];
     SEN = SEN/n;
     SREN = SREN/n;
- end
+    SDEN = SDEN/n;
+end
+ 

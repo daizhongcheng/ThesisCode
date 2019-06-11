@@ -12,7 +12,8 @@ load matdata/AS_Rim;
 load matdata/MS_Rim;
 load matdata/AMs_Rim;
 
-n1 = 10;
+n1 = 11;
+[SREN]= SlideCumulative(J_N_data,n1)
 EN = [J_N_data' dis_Rim'] ;
 EA = [J_N_addfault_data' A_dis_Rim'] ;
 EM = [J_mulfault_data' M_dis_Rim'] ;
@@ -84,5 +85,3 @@ Z2 = [X1 Y1];
 Z3 = [X2 Y2];
 Z4 = [X3 Y1];
 Z5 = [X4 Y1];
-
-

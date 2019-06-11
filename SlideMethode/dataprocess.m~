@@ -9,9 +9,8 @@ load matdata/M_dis_Rim;
 load matdata/AM_dis_Rim;
 load matdata/NS_Rim;
 load matdata/AS_Rim;
-load matdata/MS_Rim;
 load matdata/AMs_Rim;
-
+load matdata/
 n1 = 10;
 EN = [J_N_data' dis_Rim'] ;
 EA = [J_N_addfault_data' A_dis_Rim'] ;

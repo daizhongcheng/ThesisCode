@@ -3,12 +3,12 @@ clear ;
 close all ;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % initialise the condision
-sw = 10 ;
 M = 3 ;
 N = 30000 ; %Generation the number of data
 AN = 30000 ;%Generation the number of additive fault data
 MN = 30000 ; %Generation the number of maltiplicative fault data
 KFN = 10 ;%The kind fault number of faulty
+
 AllN = 3000 ; %Generation the number of additive fault and maltiplicative fault data
 S_data = [45;15;30] ; %stable operating point
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -23,12 +23,10 @@ addfault_data = S_data+ch_beto+randn(M,AN) ;
 sigma_y = N_data*N_data'/(N-1);
 inv_Sigma_y = inv(sigma_y) ;
 % J_N_data = T_evaluation(N_data,inv_Sigma_y) ;
-
-
 X = mean_matrix(normdata) ;
 % J_N_data = T_evaluation(normdata - data_mean,inv_Sigma_y) ;
 J_N_data = T_evaluation(N_data,inv_Sigma_y) ;
-[dis_Rim NS_Rim C_data] = R_evaluation(normdata,X,sw);
+[dis_Rim C_data] = R_evaluation(normdata,X);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % additive fault
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,7 +34,7 @@ J_N_data = T_evaluation(N_data,inv_Sigma_y) ;
 N_addfault_data = y_variance*(addfault_data - data_mean) ;
 J_N_addfault_data = T_evaluation(N_addfault_data,inv_Sigma_y) ;
 
-[A_dis_Rim AS_Rim A_C_data] = R_evaluation(addfault_data,X,sw);
+[A_dis_Rim A_C_data] = R_evaluation(addfault_data,X);
 x = 1:(N+AN);
  
  plot(x,[J_N_data J_N_addfault_data])
@@ -85,7 +83,7 @@ multifault_data = multifault_data + randn(M,AN);
 % multifault_data=C*R+diag(data_mean)*ones(M,MN) ;
 N_multifault_data = y_variance*(multifault_data - data_mean) ;
 J_mulfault_data = T_evaluation(N_multifault_data,inv_Sigma_y) ;
-[M_dis_Rim MS_Rim M_data] = R_evaluation(multifault_data,X,sw);
+[M_dis_Rim M_data] = R_evaluation(multifault_data,X);
 
 % plot(x,[J_N_data J_mulfault_data])
 % 
@@ -114,7 +112,7 @@ end
 for i = 1:KFN/2
     rand_vec = unifrnd(0.5,1,3,1) ;
     rand_cor = rand_vec*rand_vec';
-    sigma_m = sigma_y+rand_cor ;
+    sigma_m = sigma_y+rand_cor;
 %     C = chol(sigma_m);
     R = randn(M,BL);
 %     K_multifault_data=C*R+diag(data_mean)*ones(M,BL);
@@ -135,7 +133,7 @@ normdata = S_data + randn(3,N) ;
 allfault_data=multifault_data1+ch_beto ;
 J_allfault_data = T_evaluation(y_variance*(allfault_data - data_mean),...
     inv_Sigma_y) ;
-[AM_dis_Rim AMs_Rim A_data] = R_evaluation(allfault_data,X,sw);
+[AM_dis_Rim A_data] = R_evaluation(allfault_data,X);
 % plot(x,[dis_Rim A_dis_Rim])
 % 
 % figure

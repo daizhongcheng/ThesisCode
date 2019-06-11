@@ -1,14 +1,12 @@
-function [dis_Rim dis_SRim C_data] = R_evaluation(data,mean_matrix,sw)
+function [dis_Rim C_data] = R_evaluation(data,mean_matrix,sw)
 [m n] = size(data) ;
 Dis = diag(ones(m,1)*0.05) ;
 C_data = cell(1,n) ;
 
 for k = 1:(n-sw)
-    y(k)= mat2cell((data(:,(k:1:(k+sw))))*(data(:,(k:1:(k+sw))))'+Dis,m);  % each array is M*M  
+    y(k)= mat2cell((normdata(:,(k:1:(k+sw))))*(normdata(:,(k:1:(k+sw))))',m);  % each array is M*M  
 end
-for i = 1:n-sw
-    dis_SRim(i) = sqrt(sum(log(eig(y{i},mean_matrix)).^2));
-end
+
 for i = 1:n 
     C_data(i) = mat2cell(data(:,i)*data(:,i)'+Dis,m) ;
 end

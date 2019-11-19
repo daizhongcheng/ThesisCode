@@ -1,8 +1,8 @@
 function [SREN]= SlideCumulative(EN,n)
 [a b] = size(EN) ; 
     SREN = [] ;
-    for i = 1:a-n+1
-    SREN = [SREN ; sum(EN(1,i:i+n-1))] ;
+    for i = 1:b-n+1
+    SREN = [SREN ; sum(EN(i:i+n-1))] ;
     end
     SREN = SREN/n;   
 end

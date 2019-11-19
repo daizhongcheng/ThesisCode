@@ -142,4 +142,20 @@ J_allfault_data = T_evaluation(y_variance*(allfault_data - data_mean),...
 % plot(x,[normdata allfault_data])      
 
 
+ab = variance(normdata);
+miniF = S_data + 0.5*diag(ab)*randn(3,N) ;
+N_miniF = y_variance*(miniF - data_mean) ;
+J_miniF = T_evaluation(N_miniF,inv_Sigma_y) ;
+[R_miniF minif_data] = R_evaluation(allfault_data,X);
+Jt = [J_N_data  J_miniF];
+Jr = [dis_Rim R_miniF];
+yy = [normdata miniF];
+plot(Jt);
 
+
+
+%plot(yy(1,:));
+%hold on 
+%plot(yy(2,:));
+%plot(yy(3,:));
+%hold off

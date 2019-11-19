@@ -19,8 +19,9 @@ SREN = [] ;
     c = SREN(a-n+1,:) ;
     x = c(1)*ones(n-1,1);
     y = c(2)*ones(n-1,1);
-    z = [x y] ;
-    SREN = [SREN;z];
+%     z = [x y] ;
+%     SREN = [SREN;z];
+
     SEN = SEN/n;
     SREN = SREN/n;
     SDEN = SDEN/n;

@@ -22,6 +22,8 @@ theclass3 = ones(m,1);
 Y = [theclass1;theclass3];
 figure('Name','normal data and maltiplicative fault data')
  gscatter(X(:,1),X(:,2),Y,['k' 'r' ],['o' '*' ]);
+ %加分界线
+
  
 
 X = [data1;data4];
@@ -49,6 +51,10 @@ Y1 = [theclass1;theclass2;theclass3;theclass4];
 figure('Name','normal data and all fault data')
 gscatter(X1(:,1),X1(:,2),Y1,['k' 'r' 'b' 'y'],['o' '+' '*' 's']);
 
-
+ hold on
+ x = ones(1,1001)*20
+ y=0:0.01:10
+ plot(x,y,'b')
+ hold off
 
 
